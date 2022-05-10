@@ -1,12 +1,9 @@
-use ndarray::ArrayD;
-use deepzero_rust::core::{Variable, square, exp};
+use deepzero_rust::core::{Variable};
 
 fn main() {
-    let data:ArrayD<f64> = ndarray::arr1(&[0.5]).into_dyn();
-    let x = Variable::new(data);
-    let a = square(&x);
-    let b = exp(&a);
-    let y = square(&b);
-    y.backward();
-    print!("{:?}",x.grad());
+    let a = Variable::new(ndarray::arr1(&[3.0, 2.0, 5.0]));
+    let b = Variable::new(ndarray::arr1(&[2.0]));
+    let c = 2.0f64 / &a;
+    c.backward();
+    println!("{:?}", c.data());
 }
